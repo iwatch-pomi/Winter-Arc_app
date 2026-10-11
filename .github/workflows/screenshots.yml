@@ -1,12 +1,15 @@
 # シミュレーターで起動して各画面のスクリーンショットを撮る（手動実行）
+# コミットメッセージに [screenshots] を含めて push しても実行されます
 # 結果は Actions の実行ページ下部の Artifacts「screenshots」からダウンロードできます
 name: Simulator screenshots
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   screenshots:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[screenshots]')
     runs-on: macos-latest
     timeout-minutes: 40
     steps:
