@@ -6,6 +6,18 @@
 「冬の挑戦期間（Winter Arc）」を管理する iPhone 向け自己成長アプリです。
 SwiftUI + SwiftData で作られていて、外部ライブラリやサーバーは使いません（データは端末内に保存）。
 
+## スクリーンショット
+
+| ホーム | タスク | 習慣 | 記録 |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/1-home.png" width="200"> | <img src="docs/screenshots/1-tasks.png" width="200"> | <img src="docs/screenshots/1-habits.png" width="200"> | <img src="docs/screenshots/1-records.png" width="200"> |
+
+| 目標設定（初回） | 集中モード | 今日の名言 | 設定 |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/0-onboarding.png" width="200"> | <img src="docs/screenshots/2-focus.png" width="200"> | <img src="docs/screenshots/2-quote.png" width="200"> | <img src="docs/screenshots/1-settings.png" width="200"> |
+
+（iOS シミュレーターでサンプルデータを入れて撮影。写真の代わりに雪山はコードで描いたイラストです）
+
 ## 機能
 
 | タブ / 画面 | できること |
