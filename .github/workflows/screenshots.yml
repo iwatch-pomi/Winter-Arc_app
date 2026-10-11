@@ -62,9 +62,21 @@ jobs:
             xcrun simctl io "$UDID" screenshot "shots/$name.png"
           }
           shoot 0-onboarding
-          for tab in home tasks habits records settings; do
+          for tab in settings records habits home tasks; do
             shoot "1-$tab" -onboardingCompleted YES -seedSampleData YES -initialTab "$tab"
           done
+
+      - name: Crash diagnostics
+        if: always()
+        run: |
+          ls -la ~/Library/Logs/DiagnosticReports/ 2>/dev/null | grep -i winter || echo "no crash reports"
+          for f in ~/Library/Logs/DiagnosticReports/WinterArc*; do
+            [ -f "$f" ] || continue
+            echo "=== $f"
+            head -c 6000 "$f"
+          done
+          xcrun simctl spawn "$UDID" log show --last 15m --style compact \
+            --predicate 'process == "WinterArc" AND (messageType == error OR messageType == fault)' 2>/dev/null | tail -60 || true
 
       - uses: actions/upload-artifact@v4
         with:
