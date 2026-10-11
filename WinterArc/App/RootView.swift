@@ -5,6 +5,7 @@ enum AppTab: Hashable {
 }
 
 struct RootView: View {
+    @Environment(\.modelContext) private var context
     @AppStorage(SettingsKey.onboardingCompleted) private var onboardingCompleted = false
     @AppStorage(SettingsKey.seasonStart) private var seasonStart: Double = 0
     @AppStorage(SettingsKey.seasonEnd) private var seasonEnd: Double = 0
@@ -29,7 +30,13 @@ struct RootView: View {
                 .tag(AppTab.settings)
         }
         .tint(.white)
-        .onAppear(perform: ensureSeason)
+        .onAppear {
+            ensureSeason()
+            #if DEBUG
+            SampleData.seedIfNeeded(context)
+            if let tab = SampleData.initialTab { selection = tab }
+            #endif
+        }
         .fullScreenCover(isPresented: Binding(
             get: { !onboardingCompleted },
             set: { onboardingCompleted = !$0 }
