@@ -76,10 +76,13 @@ struct HabitsView: View {
                     Text(habit.name)
                         .font(.subheadline.weight(.semibold))
                         .lineLimit(1)
+                        .layoutPriority(1)
                     if habit.currentStreak > 1 {
                         Label("\(habit.currentStreak)日連続", systemImage: "flame.fill")
                             .font(.caption2)
                             .foregroundStyle(Theme.secondaryText)
+                            .lineLimit(1)
+                            .fixedSize()
                     }
                 }
                 HabitWeekCircles(habit: habit) { day in

@@ -50,7 +50,7 @@ enum SampleData {
         for (index, preset) in HabitPreset.all.prefix(5).enumerated() {
             let habit = Habit(name: preset.name, icon: preset.icon, sortOrder: index)
             context.insert(habit)
-            for offset in -20...0 where (offset + index) % 5 != 0 {
+            for offset in -20...0 where (offset + index) % 5 != 0 || offset > -3 {
                 let log = HabitLog(day: today.adding(days: offset))
                 context.insert(log)
                 log.habit = habit

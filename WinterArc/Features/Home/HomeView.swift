@@ -44,6 +44,15 @@ struct HomeView: View {
                 }
             }
             .fullScreenCover(isPresented: $showFocus) { FocusView() }
+            #if DEBUG
+            .onAppear {
+                switch UserDefaults.standard.string(forKey: "openScreen") {
+                case "focus": showFocus = true
+                case "quote": showQuote = true
+                default: break
+                }
+            }
+            #endif
             .sheet(isPresented: $showQuote) { DailyQuoteView() }
         }
     }
