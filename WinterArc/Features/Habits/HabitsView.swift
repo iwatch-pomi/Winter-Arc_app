@@ -89,7 +89,7 @@ struct HabitsView: View {
                     HabitToggler.toggle(habit, on: day, in: context)
                 }
             }
-            Spacer(minLength: 0)
+            .frame(maxWidth: .infinity, alignment: .leading)
             Image(systemName: "chevron.right")
                 .font(.caption)
                 .foregroundStyle(Theme.tertiaryText)
