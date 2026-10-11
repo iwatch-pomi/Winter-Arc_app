@@ -52,3 +52,13 @@ PRODUCT_BUNDLE_IDENTIFIER = com.example.winterarc;  ← あなた専用の Bundl
 ```
 
 詳しくは [docs/SETUP_XCODE_CLOUD.md](docs/SETUP_XCODE_CLOUD.md) を見てください。
+
+## GitHub Actions（自動チェック）
+
+| ワークフロー | いつ動く | 内容 |
+| --- | --- | --- |
+| Build check | push のたび | macOS 上でコンパイルが通るか確認（署名なし）。Xcode Cloud に送る前にエラーに気づけます |
+| Simulator screenshots | 手動実行、またはコミットメッセージに `[screenshots]` を含めて push | シミュレーターで各画面を起動してスクリーンショットを Artifacts に保存 |
+| Upload to TestFlight | 手動実行のみ | Mac なしで TestFlight にアップロードする予備ルート（要 Secrets 設定） |
+
+開発用ビルド（Debug）では、起動引数 `-seedSampleData YES` でサンプルデータが入ります（スクリーンショット用。TestFlight 版には含まれません）。
